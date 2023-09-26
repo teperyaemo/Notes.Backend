@@ -11,6 +11,7 @@ namespace Notes.Application.Notes.Commands.CreateNote
 
         public CreateNoteCommandHandler(INotesDbContext dbContext) =>
             _dbContext = _dbContext;
+
         public async Task<Guid> Handle(CreateNoteCommand request,
             CancellationToken cancellationToken)
         {

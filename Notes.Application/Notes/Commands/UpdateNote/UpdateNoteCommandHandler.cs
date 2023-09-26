@@ -26,6 +26,10 @@ namespace Notes.Application.Notes.Commands.UpdateNote
                 throw new NotFoundException(nameof(Note), request.Id);
             }
 
+            entity.Details = request.Details;
+            entity.Title = request.Details;
+            entity.EditDate = DateTime.Now;
+
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
