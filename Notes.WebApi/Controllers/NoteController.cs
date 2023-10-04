@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Notes.Application.Notes.Commands.CreateNote;
+using Notes.Application.Notes.Commands.UpdateNote;
 using Notes.Application.Notes.Queries.GetNoteDetails;
 using Notes.Application.Notes.Queries.GetNoteList;
 using Notes.WebApi.Models;
@@ -43,5 +44,14 @@ namespace Notes.WebApi.Controllers
             var noteId = await Mediator.Send(command);
             return Ok(noteId);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateNoteDto updateNoteDto)
+        {
+            var command = _mapper.Map<UpdateNoteCommand>(updateNoteDto);
+            command.UserId = UserId;
+            await Mediator.Send(command);
+            return NoContent();
+        } 
     }
 }
