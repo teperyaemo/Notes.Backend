@@ -17,6 +17,7 @@ public class Program
         });
         builder.Services.AddApplication();
         builder.Services.AddPersistence(builder.Configuration);
+        builder.Services.AddControllers();
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowAll", policy =>
