@@ -4,6 +4,7 @@ using Notes.Application;
 using Notes.Persistance;
 using System.Reflection;
 using Notes.WebApi.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 public class Program
 {
@@ -28,6 +29,18 @@ public class Program
                 policy.AllowAnyOrigin();
             });
         });
+
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+            .AddJwtBearer("Bearer", options =>
+            {
+                options.Authority = "https://localhost:44385/";
+                options.Audience = "NotesWebAPI";
+                options.RequireHttpsMetadata = false;
+            });
 
         var app = builder.Build();
 
@@ -55,6 +68,8 @@ public class Program
         app.UseRouting();
         app.UseHttpsRedirection();
         app.UseCors("AllowAll");
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
