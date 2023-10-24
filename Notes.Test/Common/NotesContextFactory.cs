@@ -66,5 +66,10 @@ namespace Notes.Test.Common
             return context;
         }
 
+        public static void Destroy(NotesDbContext context)
+        {
+            context.Database.EnsureDeleted();
+            context.Dispose();
+        }
     }
 }
