@@ -1,17 +1,12 @@
 ﻿using AutoMapper;
-using Notes.Application.Notes.Queries.GetNoteDetails;
 using Notes.Application.Notes.Queries.GetNoteList;
 using Notes.Persistance;
 using Notes.Test.Common;
 using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Notes.Test.Notes.Queries
 {
+    [Collection("QueryCollection")]
     public class GetNoteListQueryHandlerTests
     {
         private readonly NotesDbContext context;
